@@ -1,0 +1,33 @@
+
+type Flight {
+    id: ID!
+    flightNumber: String!
+    origin: String!,
+    destination: String!,
+    departureTime: String!,
+    arrivalTime: String!,
+}
+
+type Assignment {
+    id: ID!
+    flight: Flight!
+    date: String!
+}
+
+type CrewMember {
+#    id: ID!
+    name: String!
+    employeeNumber: String!
+    position: String!
+    base: String!
+    assignment: Assignment!
+}
+
+type Query {
+    allFlights: [Flight]
+    allCrewMembers: [CrewMember]
+    findCrewMember: CrewMember
+    findCrewMembers(employeeNumber: String, base: String, position: String): [CrewMember]
+    findCrewMembersByBase: [CrewMember]
+    findCrewMembersByPosition(position: String): [CrewMember]
+}
