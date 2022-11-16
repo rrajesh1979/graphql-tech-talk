@@ -22,6 +22,13 @@ public class FlightRepository {
         ).findFirst().orElseThrow(() -> new RuntimeException("Flight not found"));
     }
 
+    // Flights by origin
+    public List<Flight> flightsByOrigin(String origin) {
+        return flights.stream().filter(
+                flight -> flight.origin().equals(origin)
+        ).toList();
+    }
+
     @PostConstruct
     private void init() {
         flights.add(new Flight(1, "AA-301", "GCM", "CLT", "13:45", "16:40"));

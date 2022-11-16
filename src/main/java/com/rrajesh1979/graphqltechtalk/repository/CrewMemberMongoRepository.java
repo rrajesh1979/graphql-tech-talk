@@ -46,6 +46,16 @@ public class CrewMemberMongoRepository {
         return crewMembers;
     }
 
+    //Get Crew Member by Employee Number
+    public CrewMember crewMemberByEmployeeNumber(String employeeNumber) {
+        Query query = new Query();
+        query.fields().exclude("_id");
+        query.addCriteria(Criteria.where("employeeNumber").is(employeeNumber));
+
+        CrewMember crewMember = mongoTemplate.findOne(query, CrewMember.class, "crew_member");
+        return crewMember;
+    }
+
     public List<CrewMember> findCrewMembers(String employeeNumber, String base, String position) {
         Query query = new Query();
         query.fields().exclude("_id");
