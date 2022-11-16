@@ -1,0 +1,127 @@
+[{
+  "_id": {
+    "$oid": "63750d93d8355c2c8722d350"
+  },
+  "name": "James Kirk",
+  "employeeNumber": "AA-PILOT-01",
+  "position": "Pilot",
+  "base": "GCM",
+  "assignment": {
+    "id": 1,
+    "flight": {
+      "id": 1,
+      "flightNumber": "AA-301",
+      "origin": "GCM",
+      "destination": "CLT",
+      "departureTime": "13:45",
+      "arrivalTime": "16:40"
+    },
+    "date": "2023-01-01"
+  },
+  "id": 1
+},{
+  "_id": {
+    "$oid": "6375126cd8355c2c8722d351"
+  },
+  "name": "Nyota Uhura",
+  "employeeNumber": "AA-PILOT-02",
+  "position": "First Officer",
+  "base": "GCM",
+  "assignment": {
+    "id": 2,
+    "flight": {
+      "id": 1,
+      "flightNumber": "AA-301",
+      "origin": "GCM",
+      "destination": "CLT",
+      "departureTime": "13:45",
+      "arrivalTime": "16:40"
+    },
+    "date": "2023-01-01"
+  },
+  "id": 2
+},{
+  "_id": {
+    "$oid": "637512afd8355c2c8722d352"
+  },
+  "name": "Christopher Pike",
+  "employeeNumber": "AA-PILOT-03",
+  "position": "Pilot",
+  "base": "JFK",
+  "assignment": {
+    "id": 3,
+    "flight": {
+      "id": 2,
+      "flightNumber": "AA-76",
+      "origin": "JFK",
+      "destination": "SFO",
+      "departureTime": "06:30",
+      "arrivalTime": "10:00"
+    },
+    "date": "2023-01-01"
+  },
+  "id": 3
+},{
+  "_id": {
+    "$oid": "637512d8d8355c2c8722d353"
+  },
+  "name": "Spock",
+  "employeeNumber": "AA-PILOT-04",
+  "position": "Second Officer",
+  "base": "JFK",
+  "assignment": {
+    "id": 4,
+    "flight": {
+      "id": 2,
+      "flightNumber": "AA-76",
+      "origin": "JFK",
+      "destination": "SFO",
+      "departureTime": "06:30",
+      "arrivalTime": "10:00"
+    },
+    "date": "2023-01-01"
+  },
+  "id": 4
+},{
+  "_id": {
+    "$oid": "63751316d8355c2c8722d354"
+  },
+  "name": "Jean-Luc Picard",
+  "employeeNumber": "AA-PILOT-05",
+  "position": "Pilot",
+  "base": "LAX",
+  "assignment": {
+    "id": 5,
+    "flight": {
+      "id": 3,
+      "flightNumber": "AA-171",
+      "origin": "LAX",
+      "destination": "JFK",
+      "departureTime": "06:00",
+      "arrivalTime": "09:30"
+    },
+    "date": "2023-01-01"
+  },
+  "id": 5
+},{
+  "_id": {
+    "$oid": "63751336d8355c2c8722d355"
+  },
+  "name": "William T. Riker",
+  "employeeNumber": "AA-PILOT-06",
+  "position": "First Officer",
+  "base": "LAX",
+  "assignment": {
+    "id": 6,
+    "flight": {
+      "id": 3,
+      "flightNumber": "AA-171",
+      "origin": "LAX",
+      "destination": "JFK",
+      "departureTime": "06:00",
+      "arrivalTime": "09:30"
+    },
+    "date": "2023-01-01"
+  },
+  "id": 6
+}]
