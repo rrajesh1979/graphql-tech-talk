@@ -35,6 +35,7 @@ type CrewMember {
     base: String!
     "The crew member's flight assignments"
     assignment: Assignment!
+    updatedTimeStamp: DateTime
 }
 
 type Query {

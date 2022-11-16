@@ -37,8 +37,6 @@ public class CrewMemberMongoRepository {
 
     //Get All Crew Members
     public List<CrewMember> allCrewMembers() {
-        Bson filter = Filters.empty();
-        Bson projection = exclude("_id");
         Query query = new Query();
         query.fields().exclude("_id");
 
