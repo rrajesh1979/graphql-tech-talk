@@ -30,6 +30,8 @@ public class CrewMemberDoc {
 
     private static String parseDate(String updatedTimeStamp) {
         String inputPattern = "E MMM dd HH:mm:ss z yyy";
+        String outputPattern = "yyyy-MM-dd";
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(inputPattern);
         Date date = null;
         try {
@@ -38,8 +40,9 @@ public class CrewMemberDoc {
             log.error("Error parsing date: " + e.getMessage());
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(outputPattern);
         String strDate = dateFormat.format(date);
+
         return strDate;
     }
 
