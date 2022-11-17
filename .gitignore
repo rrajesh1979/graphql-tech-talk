@@ -34,3 +34,4 @@ build/
 ### VS Code ###
 .vscode/
 /subgraphs/node_modules/
+/subgraphs/airport-api/.env
