@@ -15,35 +15,34 @@ public class CrewMemberDoc {
     String position;
     String base;
     Assignment assignment;
-    String updatedTimeStamp;
+    String updatedDate;
 
-    public CrewMemberDoc(String name, String employeeNumber, String position, String base, Assignment assignment, String updatedTimeStamp) {
-        String strDate = parseDate(updatedTimeStamp);
+    public CrewMemberDoc(String name, String employeeNumber, String position, String base, Assignment assignment, String updatedDate) {
+        String strDate = parseDate(updatedDate);
 
         this.name = name;
         this.employeeNumber = employeeNumber;
         this.position = position;
         this.base = base;
         this.assignment = assignment;
-        this.updatedTimeStamp = strDate;
+        this.updatedDate = strDate;
     }
 
-    private static String parseDate(String updatedTimeStamp) {
+    private static String parseDate(String updatedDate) {
         String inputPattern = "E MMM dd HH:mm:ss z yyyy";
         String outputPattern = "yyyy-MM-dd";
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(inputPattern);
         Date date = null;
         try {
-            date = simpleDateFormat.parse(updatedTimeStamp);
+            date = simpleDateFormat.parse(updatedDate);
         } catch (Exception e) {
             log.error("Error parsing date: " + e.getMessage());
         }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat(outputPattern);
-        String strDate = dateFormat.format(date);
 
-        return strDate;
+        return dateFormat.format(date);
     }
 
     //ToString
@@ -55,7 +54,7 @@ public class CrewMemberDoc {
                 ", position='" + position + '\'' +
                 ", base='" + base + '\'' +
                 ", assignment=" + assignment +
-                ", updatedTimeStamp=" + updatedTimeStamp +
+                ", updatedTimeStamp=" + updatedDate +
                 '}';
     }
 }
