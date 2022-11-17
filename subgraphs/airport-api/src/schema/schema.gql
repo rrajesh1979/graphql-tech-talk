@@ -37,10 +37,12 @@ type Airport {
   scheduled_service: String
   gps_code: String
   local_code: String
+  iata_code: String
 }
 
 type Query {
-  airports: [Airport!]!
+  airports(limit: Int = 100, skip: Int = 0): [Airport!]!
+  airportByCode(code: String!): Airport!
 }
 
 scalar link__Import

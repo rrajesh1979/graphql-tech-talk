@@ -5,10 +5,17 @@ import { Airport } from '../model/airport';
 @Injectable()
 export class AirportService {
     constructor(
-        private authorizationRepo: AirportRepository) {
+        private airportRepo: AirportRepository) {
     }
 
-    public async getAllAirports(): Promise<Airport[]> {
-        return await this.authorizationRepo.findByConditionWithSortLimit({}, {}, 10, 0);
+    public async getAirports(limit: number, skip: number): Promise<Airport[]> {
+        return await this.airportRepo.findByConditionWithSortLimit({}, {}, limit, skip);
+    }
+
+    public async getAirportByCode(airportCode: string): Promise<Airport> {
+        const filterDefinition = {
+            iata_code: airportCode
+        };
+        return await this.airportRepo.findOneByCondition(filterDefinition);
     }
 }

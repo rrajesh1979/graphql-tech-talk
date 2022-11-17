@@ -43,4 +43,7 @@ export class Airport {
 
     @Field({ nullable: true })
     local_code: string;
+
+    @Field({ nullable: true })
+    iata_code: string;
 }
