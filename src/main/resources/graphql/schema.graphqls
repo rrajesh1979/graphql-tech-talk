@@ -1,19 +1,20 @@
 scalar Date
+directive @auth(role: String!) on FIELD_DEFINITION
 # Flight entity and its members
 type Flight {
-    id: ID!
-    flightNumber: String!
-    origin: String!,
-    destination: String!,
-    departureTime: String!,
-    arrivalTime: String!,
+  id: ID!
+  flightNumber: String!
+  origin: String!
+  destination: String!
+  departureTime: String!
+  arrivalTime: String!
 }
 
 # Crew Member's Flight assignment
 type Assignment {
-    id: ID!
-    flight: Flight!
-    date: String!
+  id: ID!
+  flight: Flight!
+  date: String!
 }
 
 """
@@ -21,25 +22,30 @@ Crew Member details
 Multi-line comments are defined using three double quotes.
 """
 type CrewMember {
-    """
-    Crew Member's Full Name
-    Multi-line field description
-    """
-    name: String!
-    "The crew member's ID"
-    employeeNumber: String!
-    "The crew member's role on the flight"
-    position: String!
-    "The crew member's base location"
-    base: String!
-    "The crew member's flight assignments"
-    assignment: Assignment!
-    updatedDate: Date
+  """
+  Crew Member's Full Name
+  Multi-line field description
+  """
+  name: String!
+  "The crew member's ID"
+  employeeNumber: String!
+  "The crew member's role on the flight"
+  position: String
+  "The crew member's base location"
+  base: String!
+  "The crew member's flight assignments"
+  assignment: Assignment!
+  updatedDate: Date
+  salary: String @auth(role: "manager")
 }
 
 type Query {
-    allFlights: [Flight]
-    flightsByOrigin(origin: String): [Flight]
-    allCrewMembers: [CrewMember]
-    findCrewMembers(employeeNumber: String, base: String, position: String): [CrewMember]
+  allFlights: [Flight]
+  flightsByOrigin(origin: String): [Flight]
+  allCrewMembers: [CrewMember]
+  findCrewMembers(
+    employeeNumber: String
+    base: String
+    position: String
+  ): [CrewMember]
 }

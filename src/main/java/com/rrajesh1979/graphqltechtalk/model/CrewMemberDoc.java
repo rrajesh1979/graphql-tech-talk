@@ -8,7 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Document @Getter @Setter @Slf4j
+@Document
+@Getter
+@Setter
+@Slf4j
 public class CrewMemberDoc {
     String name;
     String employeeNumber;
@@ -16,8 +19,10 @@ public class CrewMemberDoc {
     String base;
     Assignment assignment;
     String updatedDate;
+    String salary;
 
-    public CrewMemberDoc(String name, String employeeNumber, String position, String base, Assignment assignment, String updatedDate) {
+    public CrewMemberDoc(String name, String employeeNumber, String position, String base, Assignment assignment,
+            String updatedDate, String salary) {
         String strDate = parseDate(updatedDate);
 
         this.name = name;
@@ -26,6 +31,7 @@ public class CrewMemberDoc {
         this.base = base;
         this.assignment = assignment;
         this.updatedDate = strDate;
+        this.salary = salary;
     }
 
     private static String parseDate(String updatedDate) {
@@ -45,7 +51,7 @@ public class CrewMemberDoc {
         return dateFormat.format(date);
     }
 
-    //ToString
+    // ToString
     @Override
     public String toString() {
         return "CrewMemberDoc{" +
@@ -55,6 +61,7 @@ public class CrewMemberDoc {
                 ", base='" + base + '\'' +
                 ", assignment=" + assignment +
                 ", updatedTimeStamp=" + updatedDate +
+                ", salary=" + salary +
                 '}';
     }
 }
