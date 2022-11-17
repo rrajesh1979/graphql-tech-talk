@@ -1,6 +1,6 @@
 package com.rrajesh1979.graphqltechtalk.model;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 public record CrewMember(
         String name,
@@ -8,6 +8,6 @@ public record CrewMember(
         String position,
         String base,
         Assignment assignment,
-        Date updatedTimeStamp
+        String updatedTimeStamp
 ) {
 }

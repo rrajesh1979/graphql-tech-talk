@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.rrajesh1979.graphqltechtalk.model.CrewMember;
+import com.rrajesh1979.graphqltechtalk.model.CrewMemberDoc;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -54,7 +55,7 @@ public class CrewMemberMongoRepository {
         return crewMember;
     }
 
-    public List<CrewMember> findCrewMembers(String employeeNumber, String base, String position) {
+    public List<CrewMemberDoc> findCrewMembers(String employeeNumber, String base, String position) {
         Query query = new Query();
         query.fields().exclude("_id");
 
@@ -68,7 +69,8 @@ public class CrewMemberMongoRepository {
             query.addCriteria(Criteria.where("position").is(position));
         }
 
-        List<CrewMember> crewMembers = mongoTemplate.find(query, CrewMember.class, "crew_member");
+        List<CrewMemberDoc> crewMembers = mongoTemplate.find(query, CrewMemberDoc.class, "crew_member");
+        log.info("CrewMembers: {}", crewMembers);
         return crewMembers;
     }
 

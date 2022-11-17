@@ -1,6 +1,7 @@
 package com.rrajesh1979.graphqltechtalk.controller;
 
 import com.rrajesh1979.graphqltechtalk.model.CrewMember;
+import com.rrajesh1979.graphqltechtalk.model.CrewMemberDoc;
 import com.rrajesh1979.graphqltechtalk.repository.CrewMemberMongoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +43,10 @@ public class CrewMemberController {
 
     //GraphQL API to get crew members matching the criteria provided
     @SchemaMapping(typeName = "Query",value = "findCrewMembers")
-    public List<CrewMember> findCrewMembers(
+    public List<CrewMemberDoc> findCrewMembers(
             @Argument("employeeNumber") String employeeNumber,
             @Argument("base") String base,
             @Argument("position") String position) {
-
         return crewMemberMongoRepository.findCrewMembers(employeeNumber, base, position);
     }
 

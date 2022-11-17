@@ -1,4 +1,4 @@
-scalar DateTime
+scalar Date
 # Flight entity and its members
 type Flight {
     id: ID!
@@ -21,7 +21,6 @@ Crew Member details
 Multi-line comments are defined using three double quotes.
 """
 type CrewMember {
-#    id: ID!
     """
     Crew Member's Full Name
     Multi-line field description
@@ -35,7 +34,7 @@ type CrewMember {
     base: String!
     "The crew member's flight assignments"
     assignment: Assignment!
-    updatedTimeStamp: DateTime
+    updatedTimeStamp: Date
 }
 
 type Query {
@@ -43,7 +42,4 @@ type Query {
     flightsByOrigin(origin: String): [Flight]
     allCrewMembers: [CrewMember]
     findCrewMembers(employeeNumber: String, base: String, position: String): [CrewMember]
-#    findCrewMember: CrewMember
-#    findCrewMembersByBase: [CrewMember]
-#    findCrewMembersByPosition(position: String): [CrewMember]
 }
