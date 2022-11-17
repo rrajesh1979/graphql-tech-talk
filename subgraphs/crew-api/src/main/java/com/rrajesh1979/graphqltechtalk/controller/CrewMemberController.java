@@ -29,7 +29,7 @@ public class CrewMemberController {
 
     //REST API to get all crew members
     @GetMapping("/crewMembers")
-    public List<CrewMember> findAll() {
+    public List<CrewMemberDoc> findAll() {
         return crewMemberMongoRepository.allCrewMembers();
     }
 
@@ -52,7 +52,7 @@ public class CrewMemberController {
 
     //GraphQL API to get all crew members
     @SchemaMapping(typeName = "Query",value = "allCrewMembers")
-    public List<CrewMember> getAllCrewMembers() {
+    public List<CrewMemberDoc> getAllCrewMembers() {
         return crewMemberMongoRepository.allCrewMembers();
     }
 }
