@@ -1,0 +1,118 @@
+schema
+  @link(url: "https://specs.apollo.dev/link/v1.0")
+  @link(url: "https://specs.apollo.dev/join/v0.2", for: EXECUTION)
+{
+  query: Query
+}
+
+directive @join__field(graph: join__Graph!, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @join__graph(name: String!, url: String!) on ENUM_VALUE
+
+directive @join__implements(graph: join__Graph!, interface: String!) repeatable on OBJECT | INTERFACE
+
+directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boolean! = false, resolvable: Boolean! = true) repeatable on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT | SCALAR
+
+directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
+
+type Airport
+  @join__type(graph: PEOPLE)
+{
+  _id: ID!
+  ident: String
+  type: String!
+  name: String!
+  latitude_deg: String!
+  longitude_deg: String!
+  elevation_ft: String!
+  continent: String
+  iso_country: String
+  iso_region: String
+  municipality: String
+  scheduled_service: String
+  gps_code: String
+  local_code: String
+  iata_code: String
+}
+
+type Assignment
+  @join__type(graph: FILMS)
+{
+  id: ID!
+  flight: Flight!
+  date: String!
+}
+
+"""
+Crew Member details
+Multi-line comments are defined using three double quotes.
+"""
+type CrewMember
+  @join__type(graph: FILMS)
+{
+  """
+  Crew Member's Full Name
+  Multi-line field description
+  """
+  name: String!
+
+  """The crew member's ID"""
+  employeeNumber: String!
+
+  """The crew member's role on the flight"""
+  position: String!
+
+  """The crew member's base location"""
+  base: String!
+
+  """The crew member's flight assignments"""
+  assignment: Assignment!
+  updatedDate: Date
+}
+
+scalar Date
+  @join__type(graph: FILMS)
+
+type Flight
+  @join__type(graph: FILMS)
+{
+  id: ID!
+  flightNumber: String!
+  origin: String!
+  destination: String!
+  departureTime: String!
+  arrivalTime: String!
+}
+
+scalar join__FieldSet
+
+enum join__Graph {
+  FILMS @join__graph(name: "films", url: "http://localhost:8080/graphql")
+  PEOPLE @join__graph(name: "people", url: "http://localhost:8081/graphql")
+}
+
+scalar link__Import
+
+enum link__Purpose {
+  """
+  `SECURITY` features provide metadata necessary to securely resolve fields.
+  """
+  SECURITY
+
+  """
+  `EXECUTION` features provide metadata necessary for operation execution.
+  """
+  EXECUTION
+}
+
+type Query
+  @join__type(graph: FILMS)
+  @join__type(graph: PEOPLE)
+{
+  allFlights: [Flight] @join__field(graph: FILMS)
+  flightsByOrigin(origin: String): [Flight] @join__field(graph: FILMS)
+  allCrewMembers: [CrewMember] @join__field(graph: FILMS)
+  findCrewMembers(employeeNumber: String, base: String, position: String): [CrewMember] @join__field(graph: FILMS)
+  airports(limit: Int = 100, skip: Int = 0): [Airport!]! @join__field(graph: PEOPLE)
+  airportByCode(code: String!): Airport! @join__field(graph: PEOPLE)
+}
