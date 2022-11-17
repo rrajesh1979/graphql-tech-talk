@@ -29,7 +29,7 @@ public class CrewMemberDoc {
     }
 
     private static String parseDate(String updatedTimeStamp) {
-        String inputPattern = "E MMM dd HH:mm:ss z yyy";
+        String inputPattern = "E MMM dd HH:mm:ss z yyyy";
         String outputPattern = "yyyy-MM-dd";
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(inputPattern);
