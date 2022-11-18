@@ -1,5 +1,6 @@
 scalar Date
 directive @auth(role: String!) on FIELD_DEFINITION
+
 # Flight entity and its members
 type Flight {
   id: ID!
@@ -36,6 +37,8 @@ type CrewMember {
   "The crew member's flight assignments"
   assignment: Assignment!
   updatedDate: Date
+
+  "Crew Member Salary. Visible only to Managers"
   salary: String @auth(role: "manager")
 }
 

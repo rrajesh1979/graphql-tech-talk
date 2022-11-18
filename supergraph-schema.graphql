@@ -16,7 +16,7 @@ directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boole
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
 type Airport
-  @join__type(graph: PEOPLE)
+  @join__type(graph: AIRPORT)
 {
   _id: ID!
   ident: String
@@ -36,7 +36,7 @@ type Airport
 }
 
 type Assignment
-  @join__type(graph: FILMS)
+  @join__type(graph: CREW)
 {
   id: ID!
   flight: Flight!
@@ -48,7 +48,7 @@ Crew Member details
 Multi-line comments are defined using three double quotes.
 """
 type CrewMember
-  @join__type(graph: FILMS)
+  @join__type(graph: CREW)
 {
   """
   Crew Member's Full Name
@@ -60,7 +60,7 @@ type CrewMember
   employeeNumber: String!
 
   """The crew member's role on the flight"""
-  position: String!
+  position: String
 
   """The crew member's base location"""
   base: String!
@@ -68,13 +68,16 @@ type CrewMember
   """The crew member's flight assignments"""
   assignment: Assignment!
   updatedDate: Date
+
+  """Crew Member Salary. Visible only to Managers"""
+  salary: String
 }
 
 scalar Date
-  @join__type(graph: FILMS)
+  @join__type(graph: CREW)
 
 type Flight
-  @join__type(graph: FILMS)
+  @join__type(graph: CREW)
 {
   id: ID!
   flightNumber: String!
@@ -87,8 +90,8 @@ type Flight
 scalar join__FieldSet
 
 enum join__Graph {
-  FILMS @join__graph(name: "films", url: "http://localhost:8080/graphql")
-  PEOPLE @join__graph(name: "people", url: "http://localhost:8081/graphql")
+  AIRPORT @join__graph(name: "airport", url: "http://localhost:8081/graphql")
+  CREW @join__graph(name: "crew", url: "http://localhost:8080/graphql")
 }
 
 scalar link__Import
@@ -106,13 +109,13 @@ enum link__Purpose {
 }
 
 type Query
-  @join__type(graph: FILMS)
-  @join__type(graph: PEOPLE)
+  @join__type(graph: AIRPORT)
+  @join__type(graph: CREW)
 {
-  allFlights: [Flight] @join__field(graph: FILMS)
-  flightsByOrigin(origin: String): [Flight] @join__field(graph: FILMS)
-  allCrewMembers: [CrewMember] @join__field(graph: FILMS)
-  findCrewMembers(employeeNumber: String, base: String, position: String): [CrewMember] @join__field(graph: FILMS)
-  airports(limit: Int = 100, skip: Int = 0): [Airport!]! @join__field(graph: PEOPLE)
-  airportByCode(code: String!): Airport! @join__field(graph: PEOPLE)
+  airports(limit: Int = 100, skip: Int = 0): [Airport!]! @join__field(graph: AIRPORT)
+  airportByCode(code: String!): Airport! @join__field(graph: AIRPORT)
+  allFlights: [Flight] @join__field(graph: CREW)
+  flightsByOrigin(origin: String): [Flight] @join__field(graph: CREW)
+  allCrewMembers: [CrewMember] @join__field(graph: CREW)
+  findCrewMembers(employeeNumber: String, base: String, position: String): [CrewMember] @join__field(graph: CREW)
 }

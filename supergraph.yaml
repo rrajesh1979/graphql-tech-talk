@@ -1,10 +1,10 @@
 federation_version: 2
 subgraphs:
-  films:
+  crew:
     routing_url: http://localhost:8080/graphql
     schema:
       file: ./src/main/resources/graphql/schema.graphqls
-  people:
+  airport:
     routing_url: http://localhost:8081/graphql
     schema:
       file: ./subgraphs/airport-api/src/schema/schema.gql

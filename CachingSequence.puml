@@ -1,0 +1,52 @@
+@startuml
+title Caching in Apollo GraphQL
+actor ClientApplication as user
+
+participant "Apollo Client" as apolloClient
+participant "InMemory Cache" as inMemoryCache
+participant "GraphQL Server" as graphQLServer
+
+== Cache Miss ==
+autonumber
+user-> apolloClient:getCrewDetails(empNum: "EMP-01")
+activate inMemoryCache
+apolloClient-> inMemoryCache:Check if crew details are cached
+activate graphQLServer
+inMemoryCache-> graphQLServer :Query sent to server
+'userCore->userCore:compare passwords
+'userCore-> userCore: generate a unique token
+graphQLServer-> inMemoryCache:Response from server with EMP-01 details
+rnote over inMemoryCache
+ Generate cache ID for request EMP-01
+
+ Ex: CrewMember:cGVvcGxlOjE=
+
+ Store normalized objects in cache flat lookup table
+endrnote
+inMemoryCache-> apolloClient:EMP-01 details
+apolloClient-> user:EMP-01 details
+deactivate graphQLServer
+deactivate inMemoryCache
+deactivate apolloClient
+
+== Cache Hit ==
+autonumber
+user-> apolloClient:getCrewDetails(empNum: "EMP-01")
+activate inMemoryCache
+apolloClient-> inMemoryCache:Check if crew details are cached
+rnote over inMemoryCache
+ Generate cache ID for request EMP-01
+
+ Check in cache flat lookup table
+
+ If found, return cached data
+endrnote
+rnote over graphQLServer
+ No query sent to server
+endrnote
+inMemoryCache-> apolloClient:EMP-01 details
+apolloClient-> user:EMP-01 details
+deactivate graphQLServer
+deactivate inMemoryCache
+deactivate apolloClient
+@enduml

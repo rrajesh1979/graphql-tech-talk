@@ -1,0 +1,54 @@
+@startuml
+title N+1 problem in Apollo GraphQL
+
+participant "Client" as client
+participant "GraphQL Server" as graphQLServer
+participant "Database" as db
+
+== Default GraphQL behavior ==
+autonumber
+client-> graphQLServer:getBookAndReviews(bookNum: "BOOK-01")
+activate graphQLServer
+activate db
+graphQLServer-> db :Query DB for Book details
+db-> graphQLServer:Book details for BOOK-01
+rnote over graphQLServer
+ BOOK-01
+    REVIEW-1
+    REVIEW-2
+    REVIEW-3
+endrnote
+rnote over graphQLServer
+ Get Reviews for BOOK-01
+endrnote
+graphQLServer-> db:REVIEW-1 details
+db-> graphQLServer:REVIEW-1 details
+graphQLServer-> db:REVIEW-2 details
+db-> graphQLServer:REVIEW-2 details
+graphQLServer-> db:REVIEW-3 details
+db-> graphQLServer:REVIEW-3 details
+graphQLServer-> client:Book details and reviews for BOOK-01
+deactivate graphQLServer
+
+== GraphQL Batching Using Dataloader ==
+autonumber
+client-> graphQLServer:getBookAndReviews(bookNum: "BOOK-01")
+activate graphQLServer
+activate db
+graphQLServer-> db :Query DB for Book details
+db-> graphQLServer:Book details for BOOK-01
+rnote over graphQLServer
+ BOOK-01
+    REVIEW-1
+    REVIEW-2
+    REVIEW-3
+endrnote
+rnote over graphQLServer
+ Get Review details for BOOK-01 in Batch using Dataloader
+endrnote
+graphQLServer-> db:REVIEW-1, REVIEW-2, REVIEW-3 details
+db-> graphQLServer:REVIEW-1, REVIEW-2, REVIEW-3 details
+graphQLServer-> client:Book details and reviews for BOOK-01
+deactivate graphQLServer
+
+@enduml

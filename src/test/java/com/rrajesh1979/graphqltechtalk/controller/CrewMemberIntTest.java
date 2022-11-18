@@ -43,6 +43,6 @@ public class CrewMemberIntTest {
                 .execute()
                 .path("allCrewMembers")
                 .entityList(CrewMemberDoc.class)
-                .hasSize(crewMemberMongoRepository.allCrewMembers().size());
+                .hasSize(6);
     }
 }
