@@ -33,7 +33,7 @@ public class GraphQLConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = "graphql.tracing", name = "enabled", matchIfMissing = false)
+    @ConditionalOnProperty(prefix = "graphql.tracing", name = "enabled", matchIfMissing = true)
     public Instrumentation tracingInstrumentation() {
         return new TracingInstrumentation();
     }
